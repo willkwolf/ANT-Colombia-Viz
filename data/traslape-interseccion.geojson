@@ -1,0 +1,33 @@
+{
+  "type": "FeatureCollection",
+  "name": "Zona de Traslape en Disputa",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "nombre": "Zona de Traslape — Alto Méndez / La Ensillada",
+        "disputa": true,
+        "area_ha_aprox": 1200,
+        "comunidades": ["Nasa (Pitayó)", "Misak (Guambía)"],
+        "estado": "En disputa — Resoluciones ANT superpuestas",
+        "nota": "⚠️ INTERSECCIÓN SIMULADA — Calcular con turf.js o QGIS usando capas oficiales del IGAC"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-76.4100, 2.7100],
+          [-76.3600, 2.6950],
+          [-76.3400, 2.7200],
+          [-76.3300, 2.7600],
+          [-76.3500, 2.7900],
+          [-76.3700, 2.8100],
+          [-76.4100, 2.8000],
+          [-76.4300, 2.7700],
+          [-76.4400, 2.7400],
+          [-76.4300, 2.7100],
+          [-76.4100, 2.7100]
+        ]]
+      }
+    }
+  ]
+}

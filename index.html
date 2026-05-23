@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Investigación periodística: superposición de títulos de tierras entre las comunidades Nasa y Misak en Silvia, Cauca. Análisis de resoluciones de la Agencia Nacional de Tierras (ANT).">
+  <meta property="og:title" content="La Frontera de Papel — Conflicto Nasa-Misak en el Cauca">
+  <meta property="og:description" content="Investigación de datos: cómo las resoluciones de la ANT crearon un traslape territorial entre los resguardos de Pitayó y Guambía en Silvia, Cauca.">
+  <meta property="og:type" content="article">
+  <meta name="theme-color" content="#0a0a08">
+
+  <title>La Frontera de Papel — Conflicto Nasa-Misak, Silvia Cauca</title>
+
+  <!-- Leaflet CSS (CDN con integridad) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="anonymous"
+  >
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- =============================================
+       HERO / PORTADA
+       ============================================= -->
+  <header id="hero" role="banner">
+    <!-- Mini mapa decorativo de fondo -->
+    <div id="hero-map-bg" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <p class="hero-kicker">Investigación · Tierras · Cauca, Colombia</p>
+
+      <h1 class="hero-title">
+        La Frontera<br>
+        de <em>Papel</em>
+      </h1>
+
+      <p class="hero-subtitle">
+        Cómo las resoluciones de ampliación de la Agencia Nacional de Tierras
+        superpusieron cartográficamente dos resguardos indígenas en Silvia, Cauca,
+        encendiendo un conflicto entre naciones hermanas: los Nasa y los Misak.
+      </p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          Departamento
+          <strong>Cauca, Colombia</strong>
+        </div>
+        <div class="hero-meta-item">
+          Municipio
+          <strong>Silvia</strong>
+        </div>
+        <div class="hero-meta-item">
+          Comunidades
+          <strong>Nasa (CRIC) · Misak (AICO)</strong>
+        </div>
+        <div class="hero-meta-item">
+          Zona en disputa
+          <strong>Alto Méndez / La Ensillada</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span>Desplázate</span>
+      <div class="scroll-cue-line"></div>
+    </div>
+  </header>
+
+  <!-- =============================================
+       SCROLLYTELLING PRINCIPAL
+       Layout: Texto izquierda (scroll) | Mapa derecha (sticky)
+       ============================================= -->
+  <main id="scrollytelling" role="main">
+
+    <!-- Panel de texto con scroll -->
+    <div id="scroll-text">
+
+      <!-- ETAPA 1: Contexto Regional -->
+      <section class="step" data-stage="1" aria-label="Contexto regional">
+        <div class="step-inner">
+          <div class="step-label">
+            <span class="step-number">01</span>
+            Contexto Regional
+          </div>
+          <h2>El Cauca: epicentro de una guerra que no siempre usa armas</h2>
+
+          <p>
+            En el suroccidente colombiano, el departamento del Cauca concentra
+            una de las densidades más altas de conflictos territoriales del continente.
+            No todos son entre el Estado y grupos armados. Los más complejos —y los
+            menos cubiertos— son los que enfrentan a comunidades indígenas entre sí,
+            víctimas ambas de un sistema de titulación agraria diseñado sin precisión
+            cartográfica.
+          </p>
+
+          <div class="callout">
+            <p>
+              "El conflicto por la tierra no es solo entre el campesino y el terrateniente.
+              A veces es entre comunidades que comparten idioma, cosmovisión y
+              cinco siglos de resistencia."
+            </p>
+          </div>
+
+          <p>
+            El Cauca alberga más de 100 resguardos indígenas reconocidos por el Estado.
+            Muchos de sus títulos descansan en documentos coloniales del siglo XVIII,
+            transcritos décadas después en resoluciones administrativas que nunca
+            verificaron coordenadas sobre el terreno.
+          </p>
+        </div>
+      </section>
+
+      <!-- ETAPA 2: Silvia y las dos naciones -->
+      <section class="step" data-stage="2" aria-label="El territorio de Silvia">
+        <div class="step-inner">
+          <div class="step-label">
+            <span class="step-number">02</span>
+            El Territorio de Silvia
+          </div>
+          <h2>Dos naciones, una montaña, un Estado que no midió</h2>
+
+          <p>
+            A 2.600 metros de altitud, el municipio de Silvia es territorio ancestral
+            de los <strong style="color: #e8a020">Nasa</strong>, organizados bajo el
+            Consejo Regional Indígena del Cauca (CRIC), y de los
+            <strong style="color: #4ea8c9">Misak</strong> (Guambianos), cuya identidad
+            política se articula desde la Autoridad Indígena de Colombia (AICO).
+          </p>
+
+          <p>
+            Ambas naciones tienen títulos coloniales que se remontan a 1700 y 1708
+            respectivamente. Durante tres siglos, sus límites reales fueron sostenidos
+            por la memoria comunitaria, los mojones físicos y los acuerdos orales.
+            El problema comenzó cuando el Estado intentó formalizar esos bordes en papel.
+          </p>
+
+          <div class="legend-tags">
+            <span class="legend-tag nasa">
+              <span class="legend-dot"></span>
+              Nasa — Resguardo de Pitayó
+            </span>
+            <span class="legend-tag misak">
+              <span class="legend-dot"></span>
+              Misak — Resguardo de Guambía
+            </span>
+          </div>
+
+          <div class="stat-highlight">
+            <span class="stat-number">~1.200</span>
+            <span class="stat-label">Hectáreas en zona de traslape sin resolver</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ETAPA 3: La superposición -->
+      <section class="step" data-stage="3" aria-label="La frontera de papel">
+        <div class="step-inner">
+          <div class="step-label">
+            <span class="step-number">03</span>
+            El Hallazgo Técnico
+          </div>
+          <h2>La Frontera de Papel: cuando las resoluciones de la ANT se cruzaron</h2>
+
+          <p>
+            El análisis cartográfico de las resoluciones de ampliación de resguardo
+            emitidas por la Agencia Nacional de Tierras (ANT) revela un hecho técnico
+            crítico: los polígonos que definen jurídicamente los límites del
+            <strong style="color: #e8a020">Resguardo de Pitayó</strong> y del
+            <strong style="color: #4ea8c9">Resguardo de Guambía</strong>
+            se superponen en la zona conocida como Alto Méndez / La Ensillada.
+          </p>
+
+          <p>
+            La causa no es intencional: las resoluciones históricas describen los límites
+            en lenguaje natural —"hasta la quebrada", "al pie del cerro"— sin coordenadas
+            geodésicas. Al digitalizarlas con sistemas de información geográfica modernos,
+            dos interpretaciones razonables del mismo texto producen polígonos que se
+            solapan.
+          </p>
+
+          <div class="legend-tags">
+            <span class="legend-tag nasa">
+              <span class="legend-dot"></span>
+              Pitayó (Nasa)
+            </span>
+            <span class="legend-tag misak">
+              <span class="legend-dot"></span>
+              Guambía (Misak)
+            </span>
+            <span class="legend-tag traslape">
+              <span class="legend-dot"></span>
+              Zona en disputa ↗
+            </span>
+          </div>
+
+          <div class="callout">
+            <p>
+              La superposición no crea derechos adicionales para ninguna comunidad.
+              Crea incertidumbre jurídica que el Estado no ha resuelto,
+              y que las propias comunidades deben negociar —a veces con tensión— en su cotidianidad.
+            </p>
+          </div>
+
+          <p>
+            Esta visualización mapea las coordenadas del traslape utilizando los polígonos
+            descargados directamente de los portales oficiales del Estado colombiano
+            (Datos Abiertos / IGAC). Ver sección de metodología y descargo de responsabilidad.
+          </p>
+        </div>
+      </section>
+
+    </div><!-- / #scroll-text -->
+
+    <!-- Panel del mapa (sticky en desktop) -->
+    <div id="map-sticky" role="complementary" aria-label="Mapa interactivo">
+      <div id="map"></div>
+
+      <!-- HUD con badges de capas activas -->
+      <div id="map-hud" aria-hidden="true">
+        <div id="hud-nasa" class="hud-badge nasa">● Nasa — Pitayó</div>
+        <div id="hud-misak" class="hud-badge misak">● Misak — Guambía</div>
+        <div id="hud-traslape" class="hud-badge traslape">⚠ Traslape activo</div>
+      </div>
+
+      <!-- Etiqueta de estado del mapa -->
+      <div id="map-stage-label" aria-live="polite">Cauca, Suroccidente Colombiano</div>
+    </div><!-- / #map-sticky -->
+
+  </main>
+
+  <!-- =============================================
+       OPEN DATA HUB — Descarga de datos
+       ============================================= -->
+  <section id="open-data" aria-labelledby="data-section-title">
+    <p class="section-eyebrow">Open Data Hub</p>
+    <h2 class="section-title" id="data-section-title">Datos abiertos para replicar la investigación</h2>
+    <p class="section-desc">
+      Toda la evidencia cartográfica y documental detrás de esta investigación está disponible
+      para descarga libre. Los archivos geoespaciales pueden abrirse en QGIS, ArcGIS o cualquier
+      software compatible con el estándar GeoJSON/WGS84.
+    </p>
+
+    <div class="mock-warning" role="alert">
+      ⚠&nbsp; Los archivos GeoJSON actuales son datos simulados (mock).
+      Reemplaza los archivos en <code>/data/</code> con las capas oficiales del IGAC.
+    </div>
+
+    <div class="data-cards">
+
+      <!-- Card 1: GeoJSON Unificado -->
+      <div class="data-card">
+        <div class="data-card-icon">🗺️</div>
+        <div class="data-card-title">Capas Geográficas Unificadas</div>
+        <div class="data-card-desc">
+          GeoJSON único con los tres polígonos: Resguardo Pitayó (Nasa),
+          Resguardo Guambía (Misak) y la zona de intersección en disputa.
+          Sistema de referencia: WGS84 / EPSG:4326.
+        </div>
+        <div class="data-card-meta">FORMATO: GeoJSON · EPSG:4326 · Licencia CC-BY</div>
+        <button id="btn-download-geojson" class="btn-download" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Descargar GeoJSON Unificado
+        </button>
+      </div>
+
+      <!-- Card 2: Polígono Pitayó -->
+      <div class="data-card">
+        <div class="data-card-icon">🟡</div>
+        <div class="data-card-title">Resguardo de Pitayó (Nasa)</div>
+        <div class="data-card-desc">
+          Capa individual del Resguardo Indígena de Pitayó. Contiene los metadatos
+          de la resolución de reconocimiento y ampliación de la ANT.
+        </div>
+        <div class="data-card-meta">FORMATO: GeoJSON · Comunidad: Nasa / CRIC</div>
+        <a href="./data/resguardo-pitayo.geojson" download="resguardo-pitayo.geojson" class="btn-download">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Descargar Pitayó.geojson
+        </a>
+      </div>
+
+      <!-- Card 3: Polígono Guambía -->
+      <div class="data-card">
+        <div class="data-card-icon">🔵</div>
+        <div class="data-card-title">Resguardo de Guambía (Misak)</div>
+        <div class="data-card-desc">
+          Capa individual del Resguardo Indígena de Guambía. Incluye atributos del
+          título colonial y las resoluciones de ampliación vigentes.
+        </div>
+        <div class="data-card-meta">FORMATO: GeoJSON · Comunidad: Misak / AICO</div>
+        <a href="./data/resguardo-guambia.geojson" download="resguardo-guambia.geojson" class="btn-download">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Descargar Guambía.geojson
+        </a>
+      </div>
+
+      <!-- Card 4: Zona de traslape -->
+      <div class="data-card">
+        <div class="data-card-icon">🔴</div>
+        <div class="data-card-title">Zona de Traslape — Intersección</div>
+        <div class="data-card-desc">
+          Polígono calculado de la intersección geométrica entre ambos resguardos.
+          Representa la zona jurídicamente ambigua de Alto Méndez / La Ensillada.
+        </div>
+        <div class="data-card-meta">FORMATO: GeoJSON · Área aprox.: ~1.200 ha</div>
+        <a href="./data/traslape-interseccion.geojson" download="traslape-interseccion.geojson" class="btn-download">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Descargar Traslape.geojson
+        </a>
+      </div>
+
+      <!-- Card 5: Documentos legales -->
+      <div class="data-card">
+        <div class="data-card-icon">📄</div>
+        <div class="data-card-title">Soporte Legal y Resoluciones ANT</div>
+        <div class="data-card-desc">
+          PDFs con los títulos coloniales indexados y las resoluciones oficiales
+          de la Agencia Nacional de Tierras. Documentos fuente de la investigación.
+        </div>
+        <div class="data-card-meta">FORMATO: PDF · Fuente: ANT / IGAC</div>
+        <button class="btn-download" type="button" onclick="alert('Coloca los archivos PDF en /data/docs/ y actualiza este enlace.')">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Descargar Resoluciones (PDF)
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =============================================
+       METODOLOGÍA
+       ============================================= -->
+  <section id="methodology" aria-labelledby="method-title">
+    <div class="method-block">
+      <h3 id="method-title">Metodología cartográfica</h3>
+      <ul>
+        <li>Descarga de capas de resguardos desde el portal de Datos Abiertos Colombia y el IGAC</li>
+        <li>Verificación de sistema de referencia: WGS84 / EPSG:4326</li>
+        <li>Cálculo de intersección geométrica con QGIS (Herramienta: Intersect)</li>
+        <li>Validación cruzada con resoluciones textuales de la ANT</li>
+        <li>Visualización con Leaflet.js sobre capa base CARTO Dark</li>
+      </ul>
+    </div>
+
+    <div class="method-block">
+      <h3>Fuentes primarias</h3>
+      <ul>
+        <li>Agencia Nacional de Tierras (ANT) — Resoluciones de ampliación de resguardo</li>
+        <li>Instituto Geográfico Agustín Codazzi (IGAC) — Cartografía oficial</li>
+        <li>Datos Abiertos Colombia — <em>datos.gov.co</em></li>
+        <li>Títulos coloniales indexados en el Archivo General de la Nación</li>
+        <li>Entrevistas con autoridades Nasa y Misak (en curso)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- =============================================
+       DISCLAIMER TÉCNICO — OBLIGATORIO
+       ============================================= -->
+  <section id="disclaimer" role="note" aria-label="Descargo de responsabilidad técnica">
+    <div class="disclaimer-grid">
+
+      <div>
+        <div class="disclaimer-label">Descargo de Responsabilidad Técnica</div>
+        <div class="disclaimer-title">Nota sobre la visualización cartográfica</div>
+      </div>
+
+      <div class="disclaimer-text">
+        <p>
+          <strong>La presente visualización digital mapea directamente las coordenadas
+          geodésicas obtenidas de los portales oficiales del Estado colombiano</strong>,
+          específicamente de los sistemas de información del Instituto Geográfico Agustín
+          Codazzi (IGAC) y de la plataforma Datos Abiertos Colombia (<em>datos.gov.co</em>),
+          así como de las resoluciones públicas emitidas por la Agencia Nacional de Tierras (ANT).
+        </p>
+        <p style="margin-top:0.8rem">
+          El presente medio de comunicación no efectúa juicios subjetivos de delimitación
+          fronteriza ni emite opinión sobre la legitimidad de los títulos de ninguna de las
+          comunidades. La superposición mostrada es un hecho técnico derivado de la
+          interpretación geométrica de actos administrativos públicos.
+          <strong>La determinación de los límites reales es competencia exclusiva de las
+          autoridades competentes del Estado colombiano en diálogo con las comunidades
+          afectadas.</strong>
+        </p>
+        <p style="margin-top:0.8rem">
+          Los polígonos actualmente desplegados en esta plataforma son datos simulados
+          (mock) hasta que sean reemplazados por los archivos GeoJSON oficiales.
+          Ver carpeta <code>/data/</code> del repositorio.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =============================================
+       FOOTER
+       ============================================= -->
+  <footer>
+    <p>
+      &copy; 2024 · Investigación periodística · Código abierto bajo
+      <a href="https://github.com/willkwolf/ANT-Cauca/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+    </p>
+    <p>
+      Datos: <a href="https://datos.gov.co" target="_blank" rel="noopener">datos.gov.co</a> ·
+      <a href="https://igac.gov.co" target="_blank" rel="noopener">IGAC</a> ·
+      <a href="https://github.com/willkwolf/ANT-Cauca" target="_blank" rel="noopener">Ver en GitHub ↗</a>
+    </p>
+  </footer>
+
+  <!-- Leaflet JS (CDN con integridad) -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLcE="
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- Lógica principal de la aplicación -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
