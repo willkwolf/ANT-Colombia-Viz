@@ -2,7 +2,23 @@
 
 Longform scrollytelling de periodismo de datos sobre la superposición de títulos territoriales entre los resguardos indígenas de Pitayó (Nasa) y Guambía (Misak) en Silvia, Cauca, causada por resoluciones de la Agencia Nacional de Tierras (ANT).
 
-**Sitio en vivo:** https://willkwolf.github.io/ANT-Colombia-Viz/
+> [!CAUTION]
+> **Enlace de publicación desactivado:** La visualización web se mantiene bajo entorno local de pruebas. No se publicará de manera abierta en entornos de producción debido a la inexistencia de datos geográficos oficiales confiables y la opacidad administrativa de las entidades gubernamentales del Estado colombiano.
+
+---
+
+## 🏛️ La Opacidad del Estado: Barreras para la Investigación Digital
+
+La "Frontera de Papel" no es solo un conflicto territorial entre dos comunidades indígenas hermanas; es un reflejo de la **opacidad estructural del Estado colombiano** respecto a su información cartográfica y de tierras. 
+
+Durante esta investigación digital, el acceso a datos oficiales abiertos evidenció barreras técnicas sistemáticas que impiden el control ciudadano y el periodismo de datos independiente:
+
+1. **Datos Fragmentados y Desactualizados:** Portales como *datos.gov.co* o el Geoportal del Instituto Geográfico Agustín Codazzi (IGAC) alojan capas de resguardos que no coinciden con las resoluciones textuales vigentes de la Agencia Nacional de Tierras (ANT). Los polígonos oficiales presentan desfases históricos sin depurar.
+2. **Vacíos de Información Georreferenciada:** Las resoluciones de ampliación emitidas por la ANT describen los límites de los resguardos en lenguaje natural ("desde el filo del cerro hasta la quebrada") sin asociar coordenadas geodésicas (WGS84) precisas. Al no digitalizar técnicamente sus propios actos administrativos, el Estado produce vacíos legales y cartográficos que propician el traslape en el terreno.
+3. **Plataformas Inaccesibles (Barreras de Entrada):** La cartografía oficial de la Agencia Nacional de Tierras y del IGAC está dispersa en visores propietarios lentos (ArcGIS WebMaps) y APIs REST inestables que carecen de documentación clara o descargas masivas sencillas en estándares abiertos (GeoJSON/WFS).
+4. **La "Burocracia del Dato":** Obtener los planos definitivos y las carteras de coordenadas requiere derechos de petición formales con tiempos de respuesta prolongados, limitando la inmediatez de la investigación periodística sobre conflictos territoriales activos.
+
+Este proyecto utiliza capas geográficas **simuladas (mock)** en su carpeta `/data/` para representar fielmente la superposición descrita en testimonios y documentos legales físicos. La imposibilidad de sustituirlos por capas oficiales definitivas y unificadas es la mayor prueba de que el catastro indígena en Colombia sigue siendo una frontera invisible.
 
 ---
 
@@ -12,10 +28,10 @@ Longform scrollytelling de periodismo de datos sobre la superposición de títul
 ANT-Colombia-Viz/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml           # CI/CD: Pipeline de pruebas y despliegue a GitHub Pages
+│       └── deploy.yml           # CI: Pipeline de pruebas automatizadas (sin despliegue)
 ├── index.html                   # Página principal (HTML semántico y accesible)
 ├── css/
-│   └── style.css                # Estilos adaptativos completos (responsive y responsive móvil)
+│   └── style.css                # Estilos adaptativos completos
 ├── js/
 │   └── main.js                  # Lógica del mapa (Leaflet.js + IntersectionObserver)
 ├── data/
@@ -23,106 +39,48 @@ ANT-Colombia-Viz/
 │   ├── resguardo-guambia.geojson   # ⚠️ MOCK — Resguardo Guambía (Misak)
 │   └── traslape-interseccion.geojson # ⚠️ MOCK — Zona en disputa Alto Méndez
 ├── tests/
-│   ├── data-validation.spec.ts  # Pruebas unitarias de integridad cartográfica (GeoJSON)
-│   └── scrollytelling.spec.ts   # Pruebas E2E de interfaz de usuario y mapa Leaflet
+│   ├── data-validation.spec.ts  # Validación de formato y coherencia geográfica (GeoJSON)
+│   └── scrollytelling.spec.ts   # Pruebas E2E de interfaz de usuario
 ├── package.json                 # Gestión de scripts y dependencias
-├── playwright.config.ts         # Configuración del entorno de pruebas Playwright
-├── tsconfig.json                # Configuración de TypeScript
-└── README.md
+├── playwright.config.ts         # Configuración de Playwright
+└── tsconfig.json                # Configuración de TypeScript
 ```
 
 ---
 
-## 🧪 Pruebas Automatizadas (QA)
+## 🧪 Pruebas Automatizadas (QA Local)
 
-Para garantizar la confiabilidad y calidad de la investigación periodística y sus fuentes de datos, hemos implementado una suite completa de pruebas automatizadas escritas en **TypeScript** usando **Playwright**.
+Hemos diseñado una suite de pruebas para verificar que el código base y la maqueta de datos sean robustos ante futuros ingresos de información:
 
-### Pruebas de Integridad de Datos (`tests/data-validation.spec.ts`)
-*   **Proyección y Formato:** Valida que todos los archivos geográficos sean `FeatureCollection` válidos en formato **GeoJSON WGS84 / EPSG:4326**.
-*   **Coordenadas Geográficas:** Verifica matemáticamente que las coordenadas caigan dentro de los límites geográficos reales de la región del Cauca/Colombia (Longitud `[-77.0, -75.5]`, Latitud `[2.0, 3.5]`).
-*   **Atributos y Metadatos:** Comprueba la consistencia de los datos requeridos (nombre del resguardo, comunidad, hectáreas, organización asignada - CRIC/AICO).
+* **Pruebas de Datos (`tests/data-validation.spec.ts`):** Verifican que la estructura cumpla el estándar GeoJSON WGS84 / EPSG:4326 y que las coordenadas simuladas caigan dentro de la zona de Silvia, Cauca.
+* **Pruebas de Interfaz (`tests/scrollytelling.spec.ts`):** Prueban que el scroll active correctamente las transiciones del mapa, HUD, y que la descarga del archivo geográfico consolidado funcione.
 
-### Pruebas E2E de Interactividad (`tests/scrollytelling.spec.ts`)
-*   **Inicialización:** Comprueba que la librería Leaflet se inicialice correctamente en el DOM.
-*   **Transiciones del Scrollytelling:** Simula el scroll del usuario en pantalla y valida que los steps del texto y los badges dinámicos del HUD (Nasa, Misak, Traslape) ganen y pierdan visibilidad de forma correcta según cada etapa.
-*   **Consolidación de Datos:** Simula la descarga y valida que el botón "Descargar GeoJSON Unificado" combine y genere correctamente un archivo de datos estructurado.
+### Ejecución de Pruebas
 
-### Ejecución de Pruebas en Local
-
-1.  **Instala las dependencias y navegadores necesarios:**
-    ```bash
-    npm install
-    npx playwright install chromium
-    ```
-2.  **Ejecuta la suite de pruebas:**
-    ```bash
-    npm run test
-    ```
-
----
-
-## 🚀 Integración Continua (CI/CD) con GitHub Actions
-
-El proyecto cuenta con un flujo automatizado de pruebas y despliegue a producción configurado en `.github/workflows/deploy.yml`:
-
-1.  **Activación automática:** Cada vez que haces un `git push` a la rama `main`, se activa el pipeline en GitHub.
-2.  **Garantía de calidad (CI):** Ejecuta la suite completa de pruebas en contenedores Linux sin cabeza de forma paralela. Si alguna validación de datos o interacción de interfaz falla, el despliegue se detiene automáticamente para evitar publicar errores.
-3.  **Despliegue automático (CD):** Si todas las pruebas pasan, compila y despliega el sitio web estático directamente a **GitHub Pages** de forma segura utilizando los tokens oficiales de GitHub.
-
-El estado del despliegue y los reportes de pruebas pueden monitorearse directamente desde la pestaña **Actions** en tu repositorio de GitHub.
-
----
-
-## ⚠️ Reemplazo de datos (OBLIGATORIO antes de publicar)
-
-Los archivos GeoJSON en `/data/` son **datos simulados (mock)**. Para publicar con datos reales:
-
-### 1. Obtén los polígonos oficiales
-- **IGAC / Datos Abiertos Colombia:** https://datos.gov.co → busca "resguardo indígena Cauca"
-- **ANT:** https://ant.gov.co → Resoluciones de constitución y ampliación de resguardo
-- **Geoportal IGAC:** https://geoportal.igac.gov.co
-
-### 2. Verifica el sistema de referencia
-El código espera **GeoJSON en WGS84 / EPSG:4326**.  
-Si tus capas están en Magna-Sirgas (Colombia), transfórmalas en QGIS:
-> Capa → Exportar → Guardar como → CRS: EPSG:4326 → Formato: GeoJSON
-
-### 3. Calcula la intersección
-En QGIS: **Vector → Herramientas de geoprocesamiento → Intersección**  
-Capa de entrada: Pitayó | Capa de superposición: Guambía  
-Exporta el resultado como `traslape-interseccion.geojson`
-
-### 4. Reemplaza los archivos
-Sustituye los tres archivos en `/data/` manteniendo los mismos nombres. Las pruebas automatizadas validarán su consistencia al hacer push.
+1. **Instala dependencias y navegadores:**
+   ```bash
+   npm install
+   npx playwright install chromium
+   ```
+2. **Ejecuta las pruebas:**
+   ```bash
+   npm run test
+   ```
 
 ---
 
 ## Stack tecnológico
 
 | Componente | Tecnología |
-+|---|---|
-+| Mapa | [Leaflet.js 1.9.4](https://leafletjs.com/) (SRI corregido) |
-+| Capa base | CARTO Dark (CDN) |
-+| Fuentes | Google Fonts (Playfair Display, IBM Plex Mono, Source Serif 4) |
-+| Scroll detection | `IntersectionObserver` (sin scroll listeners) |
-+| Pruebas | Playwright / TypeScript |
-+| Automatización | GitHub Actions |
-+| Despliegue | GitHub Pages (estático) |
-
----
-
-## Rendimiento y calidad
-
-- ✅ Sin scroll listeners (usa `IntersectionObserver`) → sin jank
-- ✅ Capas GeoJSON cargadas asincrónicamente (lazy)
-- ✅ HTML/CSS/JS base < 250KB (sin contar tiles del mapa)
-- ✅ Responsive: layout split en desktop, mapa de fondo fijo en móvil
-- ✅ Accesible: roles ARIA, etiquetas semánticas, `aria-live` en el mapa
+|---|---|
+| Mapa | [Leaflet.js 1.9.4](https://leafletjs.com/) |
+| Capa base | CARTO Dark (CDN) |
+| Lógica | Vanilla HTML / CSS / JS |
+| Pruebas | Playwright / TypeScript |
+| Calidad | GitHub Actions CI (QA) |
 
 ---
 
 ## Licencia
 
-MIT License — Código abierto. Datos propios de las fuentes oficiales citadas.
-
-**Descargo de responsabilidad:** La visualización mapea directamente coordenadas de portales oficiales del Estado colombiano (IGAC / Datos Abiertos / ANT). No constituye juicio de delimitación fronteriza. La determinación de límites reales es competencia exclusiva de las autoridades estatales en diálogo con las comunidades.
+MIT License. Código libre para replicar visualizaciones de periodismo de datos independientes.
